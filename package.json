@@ -1,0 +1,29 @@
+{
+  "name": "twitter-js-sql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metzda/twitter-js-sql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/metzda/twitter-js-sql/issues"
+  },
+  "homepage": "https://github.com/metzda/twitter-js-sql#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "lodash": "^4.5.0",
+    "mysql": "^2.10.2",
+    "sequelize": "^3.19.3",
+    "socket.io": "^1.4.5",
+    "swig": "^1.4.2"
+  }
+}

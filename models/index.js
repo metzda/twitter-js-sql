@@ -37,11 +37,11 @@ User.findOne().then(function (user) {
     console.log(JSON.stringify(tweets)); // another way of just logging the plain old values
     
 });
-*/
-User.findOne({ include: [ Tweet ] }).then(function(tweets) {
-  console.log(JSON.stringify(tweets))
-});
 
+Tweet.findAll({include: User}).then(function(tweets) {
+  console.log(JSON.stringify(tweets));
+});
+*/
 module.exports = {
     User: User,
     Tweet: Tweet

@@ -79,19 +79,25 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
   </body>
-    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
-        var firstLoad = true;
-        var tweetList = $('.tweetList');
-        var db = new Firebase('https://g7qywdsyig0.firebaseio-demo.com/tweets');
-        db.limitToLast(1).on('child_added', function(snapshot) {
-          if (firstLoad) return;
-          var message = snapshot.val();
-          tweetList.append('<li id="' + message.date + '"><div class="allTweets"><div class="leftTweet"><img src=http://www.adweek.com/files/imagecache/node-blog/blogs/totinos-stock-01-2014.jpg class="imageSide"></div><div class="rightTweet"><p class="tweetName"><a href="/users/' + message.name + '{{tweet.name}}">' + message.name + '</a></p><p class="tweetBody">' + message.date + ' - ' + message.text + '</p></div></div></li>');
-          console.log('firebase: ' + message.name + ' - ' + message.text);
-        });
-        db.once('value', function(snapshot) {
-          firstLoad = false;
-        });
+      // Load the socket.io library above, then connect to the server.
+      // Because the socket.io server is being run on the same server as your
+      // Express instance, you can connect() without any arguments.
+      var socket = io.connect();
+      socket.on('connect', function(){
+        console.log('connected to server via WebSockets!');
+      });
+      // When 'new_tweet' events are fired, do something with the packaged tweet
+      socket.on('new_tweet', function (tweet) {
+        var elem = document.createElement('div');
+        elem.innerHTML = tweet;
+        document.getElementById("tweets").appendChild(elem.firstChild);
+        $('.alert').fadeIn('slow');
+        window.setTimeout(function(){
+          $('.alert').fadeOut('slow');
+        }, 2000);
+        // some logic to add the new tweet to the DOM…
+      });
     </script>
 </html>
